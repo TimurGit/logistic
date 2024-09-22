@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\e2e;
 
+use App\Enums\DeliveryStatusEnum;
 use App\Events\DeliveryDelivered;
 use App\Models\Delivery;
-use DB;
+use App\Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 
 class DeliveryTest extends TestCase
@@ -32,4 +33,6 @@ class DeliveryTest extends TestCase
         $response->assertOk();
         $this->assertDatabaseHas('deliveries', ['id' => $this->delivery->id, 'status' => 'delivered']);
     }
+
+    //TODO: здесь еще e2e тесты написать
 }
