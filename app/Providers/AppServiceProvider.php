@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Enums\VersionEnum;
+use App\Models\Delivery;
+use App\Observers\DeliveryObserver;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route as RouteFacade;
 use Illuminate\Support\ServiceProvider;
@@ -65,6 +67,8 @@ class AppServiceProvider extends ServiceProvider
         RouteFacade::macro('versionTo', fn (VersionEnum $to, $param = null) => $versionRange(null, $to, $param));
 
         RouteFacade::macro('version', fn (VersionEnum $version) => RouteFacade::prefix('v' . $version->value));
+
+        Delivery::observe(DeliveryObserver::class);
     }
 
     /**
